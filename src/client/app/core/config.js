@@ -4,8 +4,8 @@
     var core = angular.module('app.core');
 
     var config = {
-        appErrorPrefix: '[helloWorld Error] ',
-        appTitle: 'helloWorld'
+        appErrorPrefix: '[UXD2 Error] ',
+        appTitle: 'UXD2'
     };
 
     core.value('config', config);
