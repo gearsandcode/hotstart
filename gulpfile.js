@@ -45,30 +45,17 @@ gulp.task('vet', function() {
         .pipe($.jscs());
 });
 
-/**
- * Create a visualizer report
- */
-gulp.task('plato', function(done) {
-    log('Analyzing source with Plato');
-    log('Browse to /report/plato/index.html to see Plato results');
-
-    startPlatoVisualizer(done);
-});
-
-/**
- * Compile less to css
- * @return {Stream}
- */
 gulp.task('styles', ['clean-styles'], function() {
-    log('Compiling Less --> CSS');
+    log('SASS Compilation ==> CSS3');
 
     return gulp
-        .src(config.less)
-        .pipe($.plumber()) // exit gracefully if something fails after this
-        .pipe($.less())
-//        .on('error', errorLogger) // more verbose and dupe output. requires emit.
+        .src(config.sass)
+        .pipe($.plumber())
+        .pipe($.sass())
+        .on('error', $.sass.logError)
         .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
         .pipe(gulp.dest(config.temp));
+
 });
 
 /**
@@ -96,8 +83,8 @@ gulp.task('images', ['clean-images'], function() {
         .pipe(gulp.dest(config.build + 'images'));
 });
 
-gulp.task('less-watcher', function() {
-    gulp.watch([config.less], ['styles']);
+gulp.task('sass-watcher', function() {
+    gulp.watch([config.sass], ['styles']);
 });
 
 /**
@@ -491,12 +478,12 @@ function startBrowserSync(isDev, specRunner) {
     log('Starting BrowserSync on port ' + port);
 
     // If build: watches the files, builds, and restarts browser-sync.
-    // If dev: watches less, compiles it to css, browser-sync handles reload
+    // If dev: watches sass, compiles it to css, browser-sync handles reload
     if (isDev) {
-        gulp.watch([config.less], ['styles'])
+        gulp.watch([config.sass], ['styles'])
             .on('change', changeEvent);
     } else {
-        gulp.watch([config.less, config.js, config.html], ['browserSyncReload'])
+        gulp.watch([config.sass, config.js, config.html], ['browserSyncReload'])
             .on('change', changeEvent);
     }
 
@@ -505,7 +492,7 @@ function startBrowserSync(isDev, specRunner) {
         port: 3000,
         files: isDev ? [
             config.client + '**/*.*',
-            '!' + config.less,
+            '!' + config.sass,
             config.temp + '**/*.css'
         ] : [],
         ghostMode: { // these are the defaults t,f,t,t
@@ -552,53 +539,6 @@ function startPlatoVisualizer(done) {
             log(overview.summary);
         }
         if (done) { done(); }
-    }
-}
-
-/**
- * Start the tests using karma.
- * @param  {boolean} singleRun - True means run once and end (CI), or keep running (dev)
- * @param  {Function} done - Callback to fire when karma is done
- * @return {undefined}
- */
-function startTests(singleRun, done) {
-    var child;
-    var excludeFiles = [];
-    var fork = require('child_process').fork;
-    var karma = require('karma').server;
-    var serverSpecs = config.serverIntegrationSpecs;
-
-    if (args.startServers) {
-        log('Starting servers');
-        var savedEnv = process.env;
-        savedEnv.NODE_ENV = 'dev';
-        savedEnv.PORT = 8888;
-        child = fork(config.nodeServer);
-    } else {
-        if (serverSpecs && serverSpecs.length) {
-            excludeFiles = serverSpecs;
-        }
-    }
-
-    karma.start({
-        configFile: __dirname + '/karma.conf.js',
-        exclude: excludeFiles,
-        singleRun: !!singleRun
-    }, karmaCompleted);
-
-    ////////////////
-
-    function karmaCompleted(karmaResult) {
-        log('Karma completed');
-        if (child) {
-            log('shutting down the child process');
-            child.kill();
-        }
-        if (karmaResult === 1) {
-            done('karma: tests failed with code ' + karmaResult);
-        } else {
-            done();
-        }
     }
 }
 
