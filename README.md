@@ -1,4 +1,4 @@
-# HotStart
+# HotStart :hankey:
 
 **Generated from HotTowel Angular**
 
