@@ -4,8 +4,8 @@
     var core = angular.module('app.core');
 
     var config = {
-        appErrorPrefix: '[UXD2 Error] ',
-        appTitle: 'UXD2'
+        appErrorPrefix: '[hotStart Error] ',
+        appTitle: 'hotStart'
     };
 
     core.value('config', config);
