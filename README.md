@@ -1,4 +1,4 @@
-# UXD2
+# HotStart
 
 **Generated from HotTowel Angular**
 
