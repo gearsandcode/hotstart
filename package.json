@@ -1,6 +1,6 @@
 {
-  "name": "UXD2",
-  "description": "UXD2 - Start App",
+  "name": "hotStart",
+  "description": "hotStart - Start App",
   "version": "0.0.0",
   "scripts": {
     "init": "npm install",

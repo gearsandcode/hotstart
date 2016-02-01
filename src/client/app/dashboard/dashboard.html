@@ -1,71 +1,36 @@
-<section id="dashboard-view" class="mainbar">
-    <section class="matter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="today-datas">
-                        <li class="blightblue">
-                            <div class="pull-left"><i class="fa fa-plane"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">May 18 - 19, 2016</span> Castle Resort, Neverland
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
+<div class="container">
 
-                        <li class="borange">
-                            <div class="pull-left"><i class="fa fa-envelope"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">{{vm.messageCount}}</span> Messages
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
+    <div>
+        <h3>Member Deck</h3>
 
-                    </ul>
-                </div>
+        <ul class="draggable-objects">
+            <li  ng-repeat="user in vm.userChips" >
+                <div class="ngdrag" ng-drag="true" ng-drag-data="user" data-allow-transform="true"> {{user.name}} </div>
+            </li>
+        </ul>
+
+        <hr/>
+        <div class="ngdrop" ng-drop="true" ng-drop-success="vm.onDropCompleteUser($data,$event)">
+            <span class="title">Drop area #1</span>
+
+            <div ng-repeat="user in vm.droppedUsers" class="ngdrag" ng-drag="true" ng-drag-data="user" ng-drag-success="vm.onDragSuccessUser($data,$event)" ng-center-anchor="{{vm.centerAnchor}}">
+                {{user.name}}
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="widget wviolet">
-                        <div ht-widget-header title="People"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <table class="table table-condensed table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Age</th>
-                                        <th>Location</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="p in vm.people">
-                                        <td>{{p.firstName}}</td>
-                                        <td>{{p.lastName}}</td>
-                                        <td>{{p.age}}</td>
-                                        <td>{{p.location}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="widget wgreen">
-                        <div ht-widget-header title="{{vm.news.title}}"
-                             allow-collapse="true"></div>
-                        <div class="widget-content text-center text-info">
-                            <small>{{vm.news.description}}</small>
-                        </div>
-                        <div class="widget-foot">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
-    </section>
-</section>
+
+        <div class="ngdrop" ng-drop="true" ng-drop-success="vm.onDropComplete2($data,$event)">
+            <span class="title">Drop area #2</span>
+
+            <div ng-repeat="obj in vm.droppedObjects2" class="ngdrag" ng-drag="true" ng-drag-data="obj" ng-drag-success="vm.onDragSuccess2($data,$event)" ng-center-anchor="{{vm.centerAnchor}}">
+                {{obj.name}}
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div><!-- /.container -->

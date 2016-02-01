@@ -5,7 +5,8 @@
         'app.core',
         'app.admin',
         'app.dashboard',
-        'app.layout'
+        'app.layout',
+        'ngDraggable'
     ]);
 
 })();

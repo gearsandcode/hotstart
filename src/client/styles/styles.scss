@@ -1,0 +1,12 @@
+// bower:scss - see the includePaths in the gulp styles task
+@import "bootstrap";
+@import "font-awesome";
+// endbower
+
+
+@import "partials/bootstrap.theme";
+@import "partials/example";
+
+body {
+  padding-top: 50px;
+}

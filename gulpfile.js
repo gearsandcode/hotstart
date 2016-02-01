@@ -46,16 +46,21 @@ gulp.task('vet', function() {
 });
 
 gulp.task('styles', ['clean-styles'], function() {
-    log('SASS Compilation ==> CSS3');
+    log('SASS Compilation ==> CSS3 and bootstrap-sass import');
 
     return gulp
         .src(config.sass)
         .pipe($.plumber())
+        .pipe($.sass({
+            includePaths: [
+                config.bower.directory + 'bootstrap-sass/assets/stylesheets',
+                config.bower.directory + 'font-awesome/scss'
+            ]
+        }))
         .pipe($.sass())
         .on('error', $.sass.logError)
         .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
         .pipe(gulp.dest(config.temp));
-
 });
 
 /**
@@ -145,33 +150,6 @@ gulp.task('serve-specs', ['build-specs'], function(done) {
     done();
 });
 
-/**
- * Inject all the spec files into the specs.html
- * @return {Stream}
- */
-gulp.task('build-specs', ['templatecache'], function(done) {
-    log('building the spec runner');
-
-    var wiredep = require('wiredep').stream;
-    var templateCache = config.temp + config.templateCache.file;
-    var options = config.getWiredepDefaultOptions();
-    var specs = config.specs;
-
-    if (args.startServers) {
-        specs = [].concat(specs, config.serverIntegrationSpecs);
-    }
-    options.devDependencies = true;
-
-    return gulp
-        .src(config.specRunner)
-        .pipe(wiredep(options))
-        .pipe(inject(config.js, '', config.jsOrder))
-        .pipe(inject(config.testlibraries, 'testlibraries'))
-        .pipe(inject(config.specHelpers, 'spechelpers'))
-        .pipe(inject(specs, 'specs', ['**/*']))
-        .pipe(inject(templateCache, 'templates'))
-        .pipe(gulp.dest(config.client));
-});
 
 /**
  * Build everything
