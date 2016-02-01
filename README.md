@@ -1,4 +1,4 @@
-# helloWorld
+# UXD2
 
 **Generated from HotTowel Angular**
 
@@ -25,10 +25,7 @@
 ## Running HotTowel
 
 ### Linting
- - Run code analysis using `gulp vet`. This runs jshint, jscs, and plato.
-
-### Tests
- - Run the unit tests using `gulp test` (via karma, mocha, sinon).
+ - Run code analysis using `gulp vet`. This runs jshint and jscs.
 
 ### Running in dev mode
  - Run the project with `gulp serve-dev`
@@ -124,31 +121,15 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
     Displays all files affected and extended information about the code analysis.
 
-- `gulp plato`
-
-    Performs code analysis using plato on all javascript files. Plato generates a report in the reports folder.
-
 ### Testing
 
 - `gulp serve-specs`
 
     Serves and browses to the spec runner html page and runs the unit tests in it. Injects any changes on the fly and re runs the tests. Quick and easy view of tests as an alternative to terminal via `gulp test`.
 
-- `gulp test`
-
-    Runs all unit tests using karma runner, mocha, chai and sinon with phantomjs. Depends on vet task, for code analysis.
-
 - `gulp test --startServers`
 
     Runs all unit tests and midway tests. Cranks up a second node process to run a server for the midway tests to hit a web api.
-
-- `gulp autotest`
-
-    Runs a watch to run all unit tests.
-
-- `gulp autotest --startServers`
-
-    Runs a watch to run all unit tests and midway tests. Cranks up a second node process to run a server for the midway tests to hit a web api.
 
 ### Cleaning Up
 

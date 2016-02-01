@@ -4,7 +4,6 @@ module.exports = function() {
     var clientApp = client + 'app/';
     var report = './report/';
     var root = './';
-    var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
     var wiredep = require('wiredep');
     var bowerFiles = wiredep({devDependencies: true})['js'];
@@ -32,11 +31,10 @@ module.exports = function() {
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
         index: client + 'index.html',
-        // app js, with no specs
+        // app js
         js: [
             clientApp + '**/*.module.js',
-            clientApp + '**/*.js',
-            '!' + clientApp + '**/*.spec.js'
+            clientApp + '**/*.js'
         ],
         jsOrder: [
             '**/app.module.js',
