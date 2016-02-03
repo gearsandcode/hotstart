@@ -12,17 +12,7 @@
  - on OSX use [homebrew](http://brew.sh) `brew install node`
  - on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
-2. Install Yeoman `npm install -g yo`
-
-3. Install these NPM packages globally
-
-    ```bash
-    npm install -g bower gulp nodemon
-    ```
-
-    >Refer to these [instructions on how to not require sudo](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
-
-## Running HotTowel
+## Running HotStart
 
 ### Linting
  - Run code analysis using `gulp vet`. This runs jshint and jscs.
@@ -39,8 +29,8 @@
 ### Running the optimized code
  - Run the optimize project from the build folder with `gulp serve-build`
 
-## Exploring HotTowel
-HotTowel Angular starter project
+## Exploring HotStart
+HotStart Angular starter project
 
 ### Structure
 The structure also contains a gulpfile.js and a server folder. The server is there just so we can serve the app using node. Feel free to use any server you wish.
@@ -127,9 +117,6 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
     Serves and browses to the spec runner html page and runs the unit tests in it. Injects any changes on the fly and re runs the tests. Quick and easy view of tests as an alternative to terminal via `gulp test`.
 
-- `gulp test --startServers`
-
-    Runs all unit tests and midway tests. Cranks up a second node process to run a server for the midway tests to hit a web api.
 
 ### Cleaning Up
 
@@ -162,6 +149,14 @@ The `blocks.router` module contains a routing helper module that assists in addi
 - `gulp images`
 
     Copy all images from source to the build folder
+    
+- `gulp fonts-dev`
+
+    Copy all fonts from source to the temp dev folder
+
+- `gulp images-dev`
+
+    Copy all images from source to the temp dev folder
 
 ### Styles
 
