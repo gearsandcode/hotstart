@@ -6,7 +6,10 @@
         'app.admin',
         'app.dashboard',
         'app.layout',
-        'ngDraggable'
+        'filter.truncate',
+        'filter.startfrom',
+        'filter.partition',
+        'ui.bootstrap'
     ]);
 
 })();

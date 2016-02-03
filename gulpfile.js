@@ -63,6 +63,18 @@ gulp.task('styles', ['clean-styles'], function() {
         .pipe(gulp.dest(config.temp));
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Copy fonts
  * @return {Stream}
@@ -74,6 +86,42 @@ gulp.task('fonts', ['clean-fonts'], function() {
         .src(config.fonts)
         .pipe(gulp.dest(config.build + 'fonts'));
 });
+
+
+/**
+ * Copy fonts
+ * @return {Stream}
+ */
+gulp.task('fonts-dev', ['clean-fonts'], function() {
+    log('Copying dev fonts');
+
+    return gulp
+        .src(config.fonts)
+        .pipe(gulp.dest(config.client + 'fonts'));
+});
+
+
+
+
+
+
+
+
+/**
+ * Copy images
+ * @return {Stream}
+ */
+gulp.task('images-dev', ['clean-images'], function() {
+    log('Copying images');
+
+    return gulp
+        .src(config.images)
+        .pipe(gulp.dest(config.client + 'images'));
+});
+
+
+
+
 
 /**
  * Compress images
@@ -91,6 +139,19 @@ gulp.task('images', ['clean-images'], function() {
 gulp.task('sass-watcher', function() {
     gulp.watch([config.sass], ['styles']);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Create $templateCache from the html templates
@@ -110,6 +171,22 @@ gulp.task('templatecache', ['clean-code'], function() {
         ))
         .pipe(gulp.dest(config.temp));
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Wire-up the bower dependencies
@@ -131,6 +208,22 @@ gulp.task('wiredep', function() {
         .pipe(gulp.dest(config.client));
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
     log('Wire up css into the html, after files are ready');
 
@@ -139,6 +232,21 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
         .pipe(inject(config.css))
         .pipe(gulp.dest(config.client));
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Run the spec runner
@@ -149,6 +257,19 @@ gulp.task('serve-specs', ['build-specs'], function(done) {
     serve(true /* isDev */, true /* specRunner */);
     done();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -168,6 +289,23 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
     log(msg);
     notify(msg);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Optimize all files, move to a build folder,
@@ -265,14 +403,50 @@ gulp.task('clean-code', function(done) {
     clean(files, done);
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * serve the dev environment
  * --debug-brk or --debug
  * --nosync
  */
-gulp.task('serve-dev', ['inject'], function() {
+gulp.task('serve-dev', ['inject','fonts-dev', 'images-dev'], function() {
     serve(true /*isDev*/);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * serve the build environment
@@ -282,6 +456,24 @@ gulp.task('serve-dev', ['inject'], function() {
 gulp.task('serve-build', ['build'], function() {
     serve(false /*isDev*/);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Bump the version
@@ -455,7 +647,7 @@ function startBrowserSync(isDev, specRunner) {
         injectChanges: true,
         logFileChanges: true,
         logLevel: 'info',
-        logPrefix: 'hottowel',
+        logPrefix: 'hotstart',
         notify: true,
         reloadDelay: 0 //1000
     } ;

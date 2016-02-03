@@ -26,7 +26,10 @@ module.exports = function() {
         build: './build/',
         client: client,
         css: temp + 'styles.css',
-        fonts: bower.directory + 'font-awesome/fonts/**/*.*',
+        fonts: [
+            bower.directory + 'font-awesome/fonts/**/*.*',
+            bower.directory + 'bootstrap-sass/assets/fonts/bootstrap/**/*.*',
+            ],
         html: client + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
@@ -41,7 +44,7 @@ module.exports = function() {
             '**/*.module.js',
             '**/*.js'
         ],
-        sass: client + 'styles/styles.scss',
+        sass: client + 'styles/**/*.scss',
         report: report,
         root: root,
         server: server,

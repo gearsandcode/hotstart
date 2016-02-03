@@ -1,12 +1,20 @@
+$fa-font-path: "../fonts";
+$icon-font-path: "../fonts/";
+$font-family-sans-serif: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@import "partials/variables";
+
 // bower:scss - see the includePaths in the gulp styles task
 @import "bootstrap";
 @import "font-awesome";
 // endbower
 
 
+
 @import "partials/bootstrap.theme";
 @import "partials/example";
 
 body {
-  padding-top: 50px;
+  padding-top: 80px;
+  background: url("../images/paper_fibers.png");
 }
